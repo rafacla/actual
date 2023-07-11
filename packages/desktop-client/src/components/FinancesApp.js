@@ -40,6 +40,7 @@ import MobileBudget from './budget/MobileBudget';
 import { View } from './common';
 import FloatableSidebar, { SidebarProvider } from './FloatableSidebar';
 import GlobalKeys from './GlobalKeys';
+import { ManageCreditCardsPage } from './ManageCreditCardsPage';
 import { ManageRulesPage } from './ManageRulesPage';
 import Modals from './Modals';
 import NordigenLink from './nordigen/NordigenLink';
@@ -153,6 +154,8 @@ function StackedRoutesInner({ location }) {
         path="/accounts"
         element={isNarrowWidth ? <MobileAccounts /> : <Account />}
       />
+
+      <Route path="/cards" element={<ManageCreditCardsPage />} />
     </Routes>
   );
 }

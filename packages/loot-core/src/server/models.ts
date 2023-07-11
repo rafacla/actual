@@ -83,6 +83,13 @@ export const payeeModel = {
   },
 };
 
+export const creditCardModel = {
+  validate(creditCard, { update }: { update?: boolean } = {}) {
+    requiredFields('creditCard', creditCard, ['account_id'], update);
+    return creditCard;
+  },
+};
+
 export const transactionModel = {
   validate(trans, { update }: { update?: boolean } = {}) {
     requiredFields('transaction', trans, ['date', 'acct'], update);

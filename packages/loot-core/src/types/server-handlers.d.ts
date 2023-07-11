@@ -114,6 +114,8 @@ export interface ServerHandlers {
 
   'rules-run': (arg: { transaction }) => Promise<unknown>;
 
+  'credit-cards-get': () => Promise<unknown>;
+
   'make-filters-from-conditions': (arg: {
     conditions;
   }) => Promise<{ filters: unknown[] }>;

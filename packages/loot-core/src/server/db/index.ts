@@ -24,6 +24,7 @@ import {
   categoryModel,
   categoryGroupModel,
   payeeModel,
+  creditCardModel,
 } from '../models';
 import { sendMessages, batchMessages } from '../sync';
 
@@ -634,3 +635,36 @@ export function updateTransaction(transaction) {
 export async function deleteTransaction(transaction) {
   return delete_('transactions', transaction.id);
 }
+
+export async function getCreditCard(id) {
+  return first(`SELECT * FROM creditcards WHERE id = ?`, [id]);
+}
+
+export async function insertCreditCard(creditCard) {
+  creditCard = payeeModel.validate(creditCard);
+  let id;
+  await batchMessages(async () => {
+    id = await insertWithUUID('creditCards', creditCard);
+    await insert('payee_mapping', { id, targetId: id });
+  });
+  return id;
+}
+
+export async function deleteCreditCard(creditCard) {
+  return delete_('creditcards', creditCard.id);
+}
+
+export function updateCreditCard(creditCard) {
+  creditCard = creditCardModel.validate(creditCard, { update: true });
+  return update('creditcards', creditCard);
+}
+
+export function getCreditCards() {
+  return all(`
+    SELECT c.*, a.name from creditcards c 
+    LEFT JOIN accounts a ON (c.account_id = a.id AND a.tombstone = 0) 
+    WHERE c.tombstone = 0 
+    ORDER BY a.name COLLATE NOCASE
+  `);
+}
+

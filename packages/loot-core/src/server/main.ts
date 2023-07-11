@@ -613,6 +613,7 @@ handlers['rules-get'] = async function () {
   return rankRules(rules.getRules()).map(rule => rule.serialize());
 };
 
+
 handlers['rule-get'] = async function ({ id }) {
   let rule = rules.getRules().find(rule => rule.id === id);
   return rule ? rule.serialize() : null;
@@ -624,6 +625,10 @@ handlers['rules-run'] = async function ({ transaction }) {
 
 handlers['make-filters-from-conditions'] = async function ({ conditions }) {
   return rules.conditionsToAQL(conditions);
+};
+
+handlers['credit-cards-get'] = async function () {
+  return db.getCreditCards();  
 };
 
 handlers['getCell'] = async function ({ sheetName, name }) {

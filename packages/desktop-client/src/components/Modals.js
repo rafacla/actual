@@ -16,6 +16,7 @@ import ConfirmCategoryDelete from './modals/ConfirmCategoryDelete';
 import CreateAccount from './modals/CreateAccount';
 import CreateEncryptionKey from './modals/CreateEncryptionKey';
 import CreateLocalAccount from './modals/CreateLocalAccount';
+import EditCreditCard from './modals/EditCreditCard';
 import EditField from './modals/EditField';
 import EditRule from './modals/EditRule';
 import FixEncryptionKey from './modals/FixEncryptionKey';
@@ -145,6 +146,15 @@ function Modals({
               modalProps={modalProps}
               defaultRule={options.rule}
               onSave={options.onSave}
+            />
+          );
+
+        case 'edit-credit-card':
+          return (
+            <EditCreditCard
+              modalProps={modalProps}
+              actions={actions}
+              syncServerStatus={syncServerStatus}
             />
           );
 
